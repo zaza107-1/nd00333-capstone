@@ -13,11 +13,13 @@ from azureml.core.dataset import Dataset
 
 
 
-url = 'https://archive.ics.uci.edu/ml/machine-learning-databases/00519/heart_failure_clinical_records_dataset.csv'
+#url = 'https://archive.ics.uci.edu/ml/machine-learning-databases/00519/heart_failure_clinical_records_dataset.csv'
 ###dataset = TabularDatasetFactory.from_delimited_files(path = url)
 ###ds = dataset.to_pandas_dataframe() ### YOUR CODE HERE ###
-dataset=Dataset.Tabular.from_delimited_files(path=url)
 
+url = 'https://raw.githubusercontent.com/zaza107-1/nd00333-capstone/master/heart_failure_clinical_records_dataset.csv'
+dataset=Dataset.Tabular.from_delimited_files(path=url)
+ds = dataset.to_pandas_dataframe()
 
 
 # TODO: Split data into train and test sets.
@@ -32,7 +34,7 @@ def clean_data(data):
     y_df = x_df.pop("DEATH_EVENT")
     return x_df , y_df
 
-x, y = clean_data(dataset)
+x, y = clean_data(ds)
 
 x_train, x_test, y_train, y_test = train_test_split(x,y, test_size=0.33, random_state=42)
 
